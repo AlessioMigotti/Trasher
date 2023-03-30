@@ -6,13 +6,34 @@
         <div class="col-md-12 col-sm-12 p-4">
             <form method="POST">
                 {% csrf_token %}
-
-                <div class="pt-5">
+         <div class="pt-5">
                     <h2>Give Trash</h2>
+                    {% for pick in picks %}
+                    <div class="row">
+                        <div class="col-md-2 col-sm-12">
+                            <img class="rounded" src="{{ pick.image.url}}" width="150" height="150">
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="d-flex flex-row">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" name="items[]" class="form-check-input"
+                                        value="{{ pick.pk }}">
+                                    <label class="form-check-label">{{ pick.name }}</label>
+                                </div>
+                                <p class="font-weight-bold pl-5">&nbsp; £{{ pick.price }}</p>
+                            </div>
+                            <p>{{ pick.description}}</p>
+                        </div>
+                    </div>
+                    <hr />
+                    {% endfor %}
+                </div>
+                <div class="pt-5">
+                    <h2>Recive Trash</h2>
                     {% for sell in sells %}
                     <div class="row">
                         <div class="col-md-2 col-sm-12">
-                            <img class="rounded" src="{{ sell.image.url}}" width="150" height="100">
+                            <img class="rounded" src="{{ sell.image.url}}" width="150" height="150">
                         </div>
                         <div class="col-md-8 col-sm-12">
                             <div class="d-flex flex-row">
@@ -30,28 +51,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="pt-5">
-                    <h2>Buy Trash</h2>
-                    {% for buy in buys %}
-                    <div class="row">
-                        <div class="col-md-2 col-sm-12">
-                            <img class="rounded" src="{{ buy.image.url}}" width="150" height="100">
-                        </div>
-                        <div class="col-md-8 col-sm-12">
-                            <div class="d-flex flex-row">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" name="items[]" class="form-check-input"
-                                        value="{{ buy.pk }}">
-                                    <label class="form-check-label">{{ buy.name }}</label>
-                                </div>
-                                <p class="font-weight-bold pl-5">&nbsp; £{{ buy.price }}</p>
-                            </div>
-                            <p>{{ buy.description}}</p>
-                        </div>
-                    </div>
-                    <hr />
-                    {% endfor %}
-                </div>
+       
 
                 
                 <div class="form-group pt-3">
